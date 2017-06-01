@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>less的基本使用 | The Pursuit of Happyness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Less 是一门 CSS 预处理语言，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，帮助我们更便捷的进行web开发。Less is more！下面我将通过我在实际开发中less中的一些应用，记录并分享它的一些基本用法：">
+<meta name="keywords" content="less">
+<meta property="og:type" content="article">
+<meta property="og:title" content="less的基本使用">
+<meta property="og:url" content="http://yoursite.com/2017/03/18/less的基本使用/index.html">
+<meta property="og:site_name" content="The Pursuit of Happyness">
+<meta property="og:description" content="Less 是一门 CSS 预处理语言，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，帮助我们更便捷的进行web开发。Less is more！下面我将通过我在实际开发中less中的一些应用，记录并分享它的一些基本用法：">
+<meta property="og:image" content="http://i1.piimg.com/567571/2630cbd9ae291916.png">
+<meta property="og:image" content="http://p1.bqimg.com/567571/18a3e9a8e2529ed0.png">
+<meta property="og:image" content="http://p1.bpimg.com/567571/7303ce02fa706a62.png">
+<meta property="og:image" content="http://p1.bqimg.com/567571/e3a16eb8ec6fc1d6.png">
+<meta property="og:image" content="http://i1.piimg.com/567571/a0d00e6744b79552.png">
+<meta property="og:image" content="http://p1.bqimg.com/567571/5b3216377ee868e8.png">
+<meta property="og:updated_time" content="2017-03-18T14:37:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="less的基本使用">
+<meta name="twitter:description" content="Less 是一门 CSS 预处理语言，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，帮助我们更便捷的进行web开发。Less is more！下面我将通过我在实际开发中less中的一些应用，记录并分享它的一些基本用法：">
+<meta name="twitter:image" content="http://i1.piimg.com/567571/2630cbd9ae291916.png">
+  
+    <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">The Pursuit of Happyness</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">IT学习日记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-less的基本使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/18/less的基本使用/" class="article-date">
+  <time datetime="2017-03-18T02:50:49.000Z" itemprop="datePublished">2017-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      less的基本使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Less 是一门 CSS 预处理语言，它扩展了 CSS 语言，增加了变量、Mixin、函数等特性，使 CSS 更易维护和扩展，帮助我们更便捷的进行web开发。Less is more！<br>下面我将通过我在实际开发中less中的一些应用，记录并分享它的一些基本用法：<br><a id="more"></a></p>
+<hr>
+<h2 id="1-Less的运行环境"><a href="#1-Less的运行环境" class="headerlink" title="1.Less的运行环境"></a>1.Less的运行环境</h2><p>Less可以在多种环境中使用，包括浏览器端、桌面客户端、服务端等。这里我主要用到了两种方式开发Less，它们分别是使用桌面客户端koala和用gulp的插件gulp-less编译。</p>
+<p><strong>Koala</strong></p>
+<p>第一步，在<a href="http://koala-app.com/" title="koala" target="_blank" rel="external">koala官网</a>中下载koala客户端并安装；</p>
+<p>第二步，编辑less文件，在koala中打开此less文件；</p>
+<p><img src="http://i1.piimg.com/567571/2630cbd9ae291916.png"></p>
+<p>第三步，点击要编译的less文件，选择执行编译即可编译成css文件；</p>
+<p><img src="http://p1.bqimg.com/567571/18a3e9a8e2529ed0.png"></p>
+<p><strong>gulp插件</strong></p>
+<p>当我们模块化开发一个较复杂的Web应用时，若还使用koala编译less文件就会变得特别麻烦</p>
+<p>下图是在做的一个模块化开发的webapp时要用到的less文件：</p>
+<p><img src="http://p1.bpimg.com/567571/7303ce02fa706a62.png"></p>
+<p>这还只是一个特别简单的webapp的一部分而已，这么多less文件用koal手动编译在手动引入的话操实在过于繁琐。在使用自动化构建工具gulp时，发现一款插件gulp-less，它可以简化繁杂单调的编译工作，只需要在<code>gulpfile.js</code>里简单的配置几行代码而已。</p>
+<pre><code>var gulp = require(&apos;gulp&apos;);
+var less = require(&apos;gulp-less&apos;)();
+
+var app = {
+    srcPath: &apos;src/&apos;,
+    devPath: &apos;build/&apos;,
+    prdPath: &apos;dist/&apos;
+};
+
+gulp.task(&apos;less&apos;,function(){
+    gulp.src(app.srcPath + &apos;style/index.less&apos;)
+    .pipe(less.less()) //在任务中接收src pipe过来的流，编译less文件，将结果pipe到目标文件夹中
+    .pipe(gulp.dest(app.devPath + &apos;css&apos;))
+    .pipe(gulp.dest(app.prdPath + &apos;css&apos;));
+});
+</code></pre><p>有关gulp的详细用法可以参照我的上篇日记<a href="https://hitliulu.github.io/2017/03/17/%E5%BC%80%E5%8F%91%E4%B8%ADgulp%E3%80%81bower%E4%BB%A5%E5%8F%8Anodejs%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BE%BF%E6%8D%B7%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank" rel="external">开发中gulp、bower以及npm的一些便捷的使用</a> 或者转到更加权威的<a href="http://gulpjs.com/" target="_blank" rel="external">gulp官网</a>。</p>
+<hr>
+<h2 id="2-less的一些常用语法"><a href="#2-less的一些常用语法" class="headerlink" title="2.less的一些常用语法"></a>2.less的一些常用语法</h2><p><strong>定义变量</strong><br>比如颜色这种属性，我们通过定义变量再调用的方式设置颜色，变量名的定义方式是用<code>@变量名：值;</code>的方式，如下图：</p>
+<p><img src="http://p1.bqimg.com/567571/e3a16eb8ec6fc1d6.png"><br><img src="http://i1.piimg.com/567571/a0d00e6744b79552.png"></p>
+<p>上图这样的方式，当我们设置或改变皮肤时只需要改变颜色变量就可以了，非常的方便。看一个更加清晰的例子</p>
+<pre><code>@width:400px;
+@height:300px;
+@font_size:12px;
+
+textarea {
+    width:@width;
+    height:@height;
+    font-size:@font_size;
+}
+</code></pre><p>这段less代码编译后的css代码就是：</p>
+<pre><code>textarea {
+  width: 400px;
+  height: 300px;
+  font-size: 12px;
+}
+</code></pre><p><strong>后代选择器</strong><br>后代选择器我的理解就是css类可以嵌套，看一个例子：</p>
+<pre><code>@width:400px;
+@height:300px;
+@font_size:12px;
+
+textarea {
+    width:@width;
+    height:@height;
+    font-size:@font_size;
+    .abc {
+        font-size:@font_size;
+    }  
+}
+</code></pre><p>这段less代码编译后的css代码就是：</p>
+<pre><code>textarea {
+  width: 400px;
+  height: 300px;
+  font-size: 12px;
+}
+textarea .abc {
+  font-size: 12px;
+}
+</code></pre><p>也就是说在less中类嵌套类，编译出来就是一个类的后代类的样式。</p>
+<p>值得<strong>注意</strong>的是,在后代选择器中使用<code>&amp;符号</code>，不仅可以实现后代选择，还可以实现诸如:hover 和 :focus这样的伪类：</p>
+<pre><code>@width:400px;
+@height:300px;
+@font_size:12px;
+
+a {
+    width:@width;
+    height:@height;
+    font-size:@font_size;
+    &amp;:hover {
+        font-size:@font_size;
+    }  
+}
+</code></pre><p>编译后的css为：</p>
+<pre><code>a {
+  width: 400px;
+  height: 300px;
+  font-size: 12px;
+}
+a:hover {
+  font-size: 12px;
+}
+</code></pre><p><strong>文件引用</strong></p>
+<p>文件引用的方式是在less文件中写入<code>@import PATH;</code>,PATH可以是相对路径。当我们在一个less文件中将样式需要的所有变量列出来时，我们在其他less文件中需要引入这些变量，这样我们就需要文件引用功能。文件引用更重要的一个应用是在模块化开发的时候，将一个web项目切分成若干个小模块，为了便于管理，我们将每个模块对应编写对应的样式文件，但当样式文件很多时，less文件的编译和引入就会变得异常繁琐，这时候我们可以利用文件引用功能将这些less文件全部导入到一个初试less文件中，这样就可以只编译、引入一次就可以完成以前相当繁琐的任务了。例如，我将编写的所有的模块less文件引入到<code>index.less</code>的总样式文件中去：</p>
+<p><img src="http://p1.bqimg.com/567571/5b3216377ee868e8.png"></p>
+<p><strong>函数</strong></p>
+<p>函数特性是less中一个重要特性，它使得我们在编译样式的时候可以像编辑js一样动态地创建、调用样式。举个例子：</p>
+<pre><code>@width:400px;
+@height:300px;
+
+textarea {
+    width:@width;
+    height:@height;
+    .fs(13px);
+}
+
+.fs(@px) {
+  font-size: @px;
+}
+</code></pre><p>它编译后的css代码为</p>
+<pre><code>textarea {
+  width: 400px;
+  height: 300px;
+  font-size: 13px;
+}
+</code></pre><p>不要忘记在less中变量前一定要加@符号。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/18/less的基本使用/" data-id="cj3eh2r4a000h598rhoq5wq7m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/14/CSS3学习记录01-background-clip/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CSS3学习记录01/background-clip
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/17/开发中gulp、bower以及nodejs的一些便捷的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">开发中gulp、bower以及npm的一些便捷的使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT日记/">IT日记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/扯/">扯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJs/">AngularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-clip/">background-clip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bower/">bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/const/">const</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/let/">let</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ngMessages/">ngMessages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索框/">搜索框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AngularJs/" style="font-size: 10px;">AngularJs</a> <a href="/tags/CSS3/" style="font-size: 10px;">CSS3</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/background-clip/" style="font-size: 10px;">background-clip</a> <a href="/tags/bower/" style="font-size: 10px;">bower</a> <a href="/tags/const/" style="font-size: 10px;">const</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/let/" style="font-size: 10px;">let</a> <a href="/tags/ngMessages/" style="font-size: 10px;">ngMessages</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/搜索框/" style="font-size: 10px;">搜索框</a> <a href="/tags/正则表达式/" style="font-size: 20px;">正则表达式</a> <a href="/tags/类/" style="font-size: 10px;">类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/31/正则表达式-属性与方法/">正则表达式--属性与方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/30/正则表达式--类/">正则表达式--类</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/es6学习笔记01-let、const/">es6学习笔记01/let、const</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/14/CSS3学习记录01-background-clip/">CSS3学习记录01/background-clip</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/18/less的基本使用/">less的基本使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 LiuLu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

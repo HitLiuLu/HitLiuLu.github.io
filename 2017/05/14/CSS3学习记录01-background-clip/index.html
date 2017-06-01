@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>CSS3学习记录01/background-clip | The Pursuit of Happyness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前一直在vuejs做一个项目，接下来要改UI部分，就利用课余时间看一下《CSS SECRETS》,补一下CSS知识。 《第2章 背景与边框 – 1.半透明边框》">
+<meta name="keywords" content="CSS3,background-clip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3学习记录01&#x2F;background-clip">
+<meta property="og:url" content="http://yoursite.com/2017/05/14/CSS3学习记录01-background-clip/index.html">
+<meta property="og:site_name" content="The Pursuit of Happyness">
+<meta property="og:description" content="之前一直在vuejs做一个项目，接下来要改UI部分，就利用课余时间看一下《CSS SECRETS》,补一下CSS知识。 《第2章 背景与边框 – 1.半透明边框》">
+<meta property="og:image" content="http://i2.muimg.com/588926/83792e904351fca7.png">
+<meta property="og:image" content="http://i4.buimg.com/588926/542018761565911a.png">
+<meta property="og:image" content="http://i1.piimg.com/588926/2c4b1bd4af4836eb.png">
+<meta property="og:updated_time" content="2017-05-14T03:29:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3学习记录01&#x2F;background-clip">
+<meta name="twitter:description" content="之前一直在vuejs做一个项目，接下来要改UI部分，就利用课余时间看一下《CSS SECRETS》,补一下CSS知识。 《第2章 背景与边框 – 1.半透明边框》">
+<meta name="twitter:image" content="http://i2.muimg.com/588926/83792e904351fca7.png">
+  
+    <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">The Pursuit of Happyness</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">IT学习日记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-CSS3学习记录01-background-clip" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/14/CSS3学习记录01-background-clip/" class="article-date">
+  <time datetime="2017-05-14T02:38:03.000Z" itemprop="datePublished">2017-05-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSS3学习记录01/background-clip
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>之前一直在vuejs做一个项目，接下来要改UI部分，就利用课余时间看一下《CSS SECRETS》,补一下CSS知识。</p>
+<p>《第2章 背景与边框 – 1.半透明边框》<br><a id="more"></a> </p>
+<hr>
+<h2 id="难题"><a href="#难题" class="headerlink" title="难题"></a>难题</h2><p>假设我们想给容器设置一层白色背景和一道半透明白色边框，body的背景会从它的半透明边框透上来。我们开始的思路可能是：</p>
+<pre><code>border: 10px solid hsla(0,0%,100%,.5); 
+background: white;
+</code></pre><p><strong>tips</strong></p>
+<pre><code>hsla -- &lt;length&gt; || &lt;percentage&gt; || &lt;percentage&gt; || &lt;opacity&gt;
+&lt;length&gt; ：
+Hue(色调)。 0(或360)表示红色，120表示绿色，240表示蓝色，当然可取其他数值来确定其它颜色；
+&lt;percentage&gt; ：
+Saturation(饱和度)。 取值为0%到100%之间的值；
+&lt;percentage&gt; ：
+Lightness(亮度)。 取值为0%到100%之间的值；
+&lt;opacity&gt; ：
+alpha(透明度)。 取值在0到1之间；
+</code></pre><p>我们会发现，我们的半透明边框并没有实现。</p>
+<p><img style="display: inline-block;text-align: left;" src="http://i2.muimg.com/588926/83792e904351fca7.png"></p>
+<hr>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>我们的边框其实是存在的，默认情况下，背景会延伸到边框所在区域下层，我们所做的让半透明白色边框透出了容器自己的白色背景，实际效果跟纯白色实色边框看起来一样。<strong>这就是背景的工作原理</strong>。但从<strong>背景与边框（第三版）</strong>开始，我们可以通过<code>background-clip</code>属性来调整上述默认行为所带来的不便。这个属性的初始值是<code>border-box</code>，意味着背景会被元素的边框外沿框裁剪掉，如果不希望背景侵入边框所在的范围，我们要做的就是把它的值设为<code>padding-box</code>，这样浏览器就会用内边距的外沿来把背景裁剪掉。</p>
+<pre><code>border: 10px solid hsla(0,0%,100%,.5);
+background: white;
+background-clip: padding-box;
+</code></pre><p><img style="display: inline-block;text-align: left;" src="http://i4.buimg.com/588926/542018761565911a.png"></p>
+<p>这样就成功的看到了半透明边框。</p>
+<hr>
+<h2 id="background-clip属性"><a href="#background-clip属性" class="headerlink" title="background-clip属性"></a>background-clip属性</h2><p><img style="display: inline-block;text-align: left;" src="http://i1.piimg.com/588926/2c4b1bd4af4836eb.png"></p>
+<p><a href="http://www.w3school.com.cn/tiy/c.asp?f=css_background-clip&amp;p=3" target="_blank" rel="external">更直观的属性测试地址(W3Shool)</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/14/CSS3学习记录01-background-clip/" data-id="cj3eh2r3y0009598rhwmbxwbh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/background-clip/">background-clip</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/05/24/es6学习笔记01-let、const/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          es6学习笔记01/let、const
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/18/less的基本使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">less的基本使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT日记/">IT日记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/扯/">扯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJs/">AngularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-clip/">background-clip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bower/">bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/const/">const</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/let/">let</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ngMessages/">ngMessages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索框/">搜索框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AngularJs/" style="font-size: 10px;">AngularJs</a> <a href="/tags/CSS3/" style="font-size: 10px;">CSS3</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/background-clip/" style="font-size: 10px;">background-clip</a> <a href="/tags/bower/" style="font-size: 10px;">bower</a> <a href="/tags/const/" style="font-size: 10px;">const</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/let/" style="font-size: 10px;">let</a> <a href="/tags/ngMessages/" style="font-size: 10px;">ngMessages</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/搜索框/" style="font-size: 10px;">搜索框</a> <a href="/tags/正则表达式/" style="font-size: 20px;">正则表达式</a> <a href="/tags/类/" style="font-size: 10px;">类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/31/正则表达式-属性与方法/">正则表达式--属性与方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/30/正则表达式--类/">正则表达式--类</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/es6学习笔记01-let、const/">es6学习笔记01/let、const</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/14/CSS3学习记录01-background-clip/">CSS3学习记录01/background-clip</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/18/less的基本使用/">less的基本使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 LiuLu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

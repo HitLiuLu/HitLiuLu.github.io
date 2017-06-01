@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>正则表达式--属性与方法 | The Pursuit of Happyness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="昨天学习了正则表达式的类那一部分，今天学习了剩下的部分。">
+<meta name="keywords" content="正则表达式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式--属性与方法">
+<meta property="og:url" content="http://yoursite.com/2017/05/31/正则表达式-属性与方法/index.html">
+<meta property="og:site_name" content="The Pursuit of Happyness">
+<meta property="og:description" content="昨天学习了正则表达式的类那一部分，今天学习了剩下的部分。">
+<meta property="og:updated_time" content="2017-05-31T14:38:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则表达式--属性与方法">
+<meta name="twitter:description" content="昨天学习了正则表达式的类那一部分，今天学习了剩下的部分。">
+  
+    <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">The Pursuit of Happyness</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">IT学习日记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-正则表达式-属性与方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/31/正则表达式-属性与方法/" class="article-date">
+  <time datetime="2017-05-31T13:17:06.000Z" itemprop="datePublished">2017-05-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      正则表达式--属性与方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>昨天学习了正则表达式的类那一部分，今天学习了剩下的部分。<br><a id="more"></a></p>
+<hr>
+<h2 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h2><p>假如我们想匹配一个连续出现20次数字的字符串，根据上次所学，我们可以写一个正则表达式来匹配，即\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d，我们发现这样写非常麻烦，我们可以使用\d{20}来匹配。</p>
+<ul>
+<li>?：出现零次或一次（最多出现一次）</li>
+<li>+：出现一次或多次（至少出现一次）</li>
+<li>*：出现零次或多次（任意次）</li>
+<li>{n}：出现n次</li>
+<li>{n,m}：出现n到m次</li>
+<li>{n,}：至少出现n次</li>
+<li>{0,n}：至多出现n次</li>
+</ul>
+<hr>
+<h2 id="贪婪模式与非贪婪模式"><a href="#贪婪模式与非贪婪模式" class="headerlink" title="贪婪模式与非贪婪模式"></a>贪婪模式与非贪婪模式</h2><p>贪婪模式：</p>
+<pre><code>&apos;12345678&apos;.replace(/\d{3,6}/g, &apos;X&apos;)
+&quot;X78&quot;
+</code></pre><p>JS默认进行贪婪匹配，所以会匹配6个数字，然后进行替换。</p>
+<p>非贪婪模式：让正则表达式尽可能少的匹配，也就是说一旦成功匹配不再继续尝试就是非贪婪模式。非贪婪模式的做法是在量词后加上<code>?</code>即可。</p>
+<pre><code>&apos;12345678&apos;.match(/\d{3,5}?/g)
+[&quot;123&quot;,&quot;456&quot;,&quot;789&quot;]
+</code></pre><hr>
+<h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><p>匹配字符串连续出现3次的场景，我们使用<code>Byron{3}</code>，我们发现匹配了3个字母n，这样我们就不能匹配连续出现的词组。使用()可以达到分组的功能，使量词作用于分组，即(Byron){3}</p>
+<hr>
+<h2 id="或"><a href="#或" class="headerlink" title="或"></a>或</h2><p>正则中使用<code>|</code>可以达到或的效果，<code>Byron|Casper</code>可以匹配Byron或Casper，<code>Byr(on|Ca)sper</code>可以匹配on或Ca。</p>
+<hr>
+<h2 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h2><p>我们想将2015-12-25变换成12/25/2015，需要使用反向引用。</p>
+<pre><code>&apos;2015-12-25&apos;.replace(/(\d{4})-(\d{2})-(\d{2})/g, &apos;$2/$3/$1&apos;)
+</code></pre><p>这样就可以变换格式成功。</p>
+<p><strong>原理：</strong>将字符串分成3组，分别是group1,group2和group3，<code>$1</code>反向引用第一组，同理$2和$3也是如此。</p>
+<hr>
+<h2 id="忽略分组"><a href="#忽略分组" class="headerlink" title="忽略分组"></a>忽略分组</h2><p>不希望捕获分组时，只需要在分组内加上?:就可以。</p>
+<pre><code>(?:Byron).(ok)
+//匹配到一个字符串加一个任意字符再加上一个分组(ok)
+</code></pre><hr>
+<h2 id="JS对象属性"><a href="#JS对象属性" class="headerlink" title="JS对象属性"></a>JS对象属性</h2><ul>
+<li>lastIndex：是当前表达式匹配内容的最后一个字符的下一个位置</li>
+<li>source：正则表达式的文本字符串<br>再加上之前说过的三个修饰符，分别对应的三个属性：global、ignore和multiline</li>
+</ul>
+<hr>
+<h2 id="test和exec方法"><a href="#test和exec方法" class="headerlink" title="test和exec方法"></a>test和exec方法</h2><ul>
+<li><p>test用于测试字符串参数中是否存在匹配正则表达式模式的字符串，如果存在返回true，不存在返回false。</p>
+<pre><code>var reg1 = /\w/;
+reg1.test(&apos;a&apos;);
+//true
+</code></pre></li>
+<li><p>exec使用正则表达式模式对字符串执行搜索，并将更新全局RegExpduixiang对象的属性以反映匹配结果，如果没有匹配的文本则返回null,否则返回一个结果数组：</p>
+<ul>
+<li>index声明匹配文本的第一个字符的位置</li>
+<li>input存放被检索的字符串string</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="字符串对象方法"><a href="#字符串对象方法" class="headerlink" title="字符串对象方法"></a>字符串对象方法</h2><ul>
+<li>search()方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/31/正则表达式-属性与方法/" data-id="cj3eh2r3w0007598r0ggsgz9d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/05/30/正则表达式--类/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">正则表达式--类</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT日记/">IT日记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/扯/">扯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJs/">AngularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-clip/">background-clip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bower/">bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/const/">const</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/let/">let</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ngMessages/">ngMessages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索框/">搜索框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AngularJs/" style="font-size: 10px;">AngularJs</a> <a href="/tags/CSS3/" style="font-size: 10px;">CSS3</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/background-clip/" style="font-size: 10px;">background-clip</a> <a href="/tags/bower/" style="font-size: 10px;">bower</a> <a href="/tags/const/" style="font-size: 10px;">const</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/let/" style="font-size: 10px;">let</a> <a href="/tags/ngMessages/" style="font-size: 10px;">ngMessages</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/搜索框/" style="font-size: 10px;">搜索框</a> <a href="/tags/正则表达式/" style="font-size: 20px;">正则表达式</a> <a href="/tags/类/" style="font-size: 10px;">类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/31/正则表达式-属性与方法/">正则表达式--属性与方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/30/正则表达式--类/">正则表达式--类</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/es6学习笔记01-let、const/">es6学习笔记01/let、const</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/14/CSS3学习记录01-background-clip/">CSS3学习记录01/background-clip</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/18/less的基本使用/">less的基本使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 LiuLu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

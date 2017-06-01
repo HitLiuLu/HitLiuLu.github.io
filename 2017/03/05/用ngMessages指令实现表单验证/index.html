@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用ngMessages指令实现表单验证 | The Pursuit of Happyness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="表单验证功能是Web前端开发中最常用、最基本的功能之一。">
+<meta name="keywords" content="AngularJs,ngMessages">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用ngMessages指令实现表单验证">
+<meta property="og:url" content="http://yoursite.com/2017/03/05/用ngMessages指令实现表单验证/index.html">
+<meta property="og:site_name" content="The Pursuit of Happyness">
+<meta property="og:description" content="表单验证功能是Web前端开发中最常用、最基本的功能之一。">
+<meta property="og:updated_time" content="2017-03-05T12:55:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用ngMessages指令实现表单验证">
+<meta name="twitter:description" content="表单验证功能是Web前端开发中最常用、最基本的功能之一。">
+  
+    <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">The Pursuit of Happyness</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">IT学习日记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-用ngMessages指令实现表单验证" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/05/用ngMessages指令实现表单验证/" class="article-date">
+  <time datetime="2017-03-05T07:29:53.000Z" itemprop="datePublished">2017-03-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用ngMessages指令实现表单验证
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>表单验证功能是Web前端开发中最常用、最基本的功能之一。<br><a id="more"></a><br>在初学AngularJs时，我们可以利用变量formName.inputFileName.$dirty,formName.inputFileName.$invalid,formName.inputFileName.$error和ng-show指令配合起来使用来完成表单验证功能。<br>即：</p>
+<pre><code>&lt;form name=&quot;signup_form&quot; ng-submit=&quot;signupForm()&quot; ng-controller=&quot;signupController&quot; novalidate&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Signup form&lt;/legend&gt;
+        &lt;!-- name --&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label&gt;Your name&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;name&quot; class=&quot;form-control&quot; id=&quot;exampleInputName&quot; placeholder=&quot;Name&quot; ng-module=&quot;signup.name&quot; ng-minlength=&quot;3&quot; ng-maxlength=&quot;20&quot; required&gt;
+            &lt;div class=&quot;error&quot; ng-show=&quot;signup_form.name.$dirty &amp;&amp; signup_form.name.$invalid &amp;&amp; signup_form.$submitted&quot;&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.name.$error.required&quot;&gt;
+                    Your name is required.
+                &lt;/small&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.name.$error.minlength&quot;&gt;
+                    Your name is required to be at least 3 characters.
+                &lt;/small&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.name.$error.maxlength&quot;&gt;
+                    Your name can&apos;t be longer than 20 characters.
+                &lt;/small&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- email --&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label&gt;Your email&lt;/label&gt;
+            &lt;input type=&quot;email&quot; name=&quot;email&quot; ng-model=&quot;signup.email&quot; class=&quot;form-control&quot; id=&quot;exampleInputEmail&quot; placeholder=&quot;Email&quot; ng-minlength=&quot;3&quot; ng-maxlength=&quot;20&quot; required&gt;
+            &lt;div class=&quot;error&quot; ng-show=&quot;signup_form.email.$dirty &amp;&amp; signup_form.email.$invalid &amp;&amp; signup_form.$submitted&quot;&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.email.$error.required&quot;&gt;
+                    Your email is required.
+                &lt;/small&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.email.$error.minlength&quot;&gt;
+                    Your email is required to be at least 3 characters.
+                &lt;/small&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.email.$error.maxlength&quot;&gt;
+                    Your email can&apos;t be longer than 20 characters.
+                &lt;/small&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.email.$error.email&quot;&gt;
+                    That is not a valid email. Please input a valid email.
+                &lt;/small&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- username --&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label&gt;Username&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;form-control&quot; id=&quot;exampleInputUsername&quot; placeholder=&quot;Desired username&quot; ng-model=&quot;signup.username&quot; ng-minlength=&quot;3&quot; ng-maxlength=&quot;20&quot; required&gt;
+            &lt;div class=&quot;error&quot; ng-show=&quot;signup_form.username.$dirty &amp;&amp; signup_form.username.$invalid &amp;&amp; signup_form.$submitted&quot;&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.username.$error.required&quot;&gt;
+                    Please input a username.
+                &lt;/small&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.username.$error.minlength&quot;&gt;
+                    Your username is required to be at least 3 characters.
+                &lt;/small&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.username.$error.maxlength&quot;&gt;
+                    Your username can&apos;t be longer than 20 characters.
+                &lt;/small&gt;
+                &lt;!-- 判断username的唯一性（自定义验证） --&gt;
+                &lt;small class=&quot;error&quot; ng-show=&quot;signup_form.username.$error.unique&quot;&gt;
+                    That username is taken, please try another.
+                &lt;/small&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+          &lt;button type=&quot;submit&quot; ng-disabled=&quot;signup_form.$invalid&quot; class=&quot;btn btn-default sub&quot;&gt;Submit&lt;/button&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+</code></pre><p>其中，代码部分样式使用bootstrap作为CSS布局框架。最后一个字段添加了一个自定义验证。这个自定义验证用AngularJs指令验证。因为本次只讨论表单验证问题，指令问题的学习感想后面我会详细补充，所以这里不予讨论。</p>
+<p>按钮部分我们使用<code>ng-disabled=”signup_form.$invalid”</code>指令基于表单的合法性进行启用或禁用。</p>
+<p>为了优化体验，即在用户提交表单完成后显示验证信息，我们在作用域中捕获一个submitted值，然后对表单内容进行验证并显示错误信息。在ng-show中加入对表单是否进行提交的检查，仅在<code>signup_form.$submitted</code>为<code>true</code>时显示错误信息。在<code>signupForm()</code>中实现这个行为。</p>
+<p>即：</p>
+<pre><code>app.controller(&apos;signupController&apos;,function($scope){
+    $scope.submitted = false;
+    $scope.signupForm = function() {
+        if($scope.signup_form.$valid) {
+            //正常提交
+        }
+        else {
+            $scopeup_Form.submitted = true;
+        }
+    }
+    })
+</code></pre><p>显而易见，以上表单验证方案比较复杂，不简洁，这显然不是一个理想的方案，为此，我们引入ngMessages指令。若我们想实现一个和上面相同的功能：</p>
+<pre><code>&lt;form name=&quot;signup_form&quot; ng-submit=&quot;signupForm()&quot; ng-controller=&quot;signupController&quot; novalidate&gt;
+    &lt;fieldset&gt;
+        &lt;legend&gt;Signup form&lt;/legend&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label&gt;Your name&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;name&quot; class=&quot;form-control&quot; id=&quot;exampleInputName&quot; placeholder=&quot;Name&quot; ng-module=&quot;signup.name&quot; ng-minlength=&quot;3&quot; ng-maxlength=&quot;20&quot; required&gt;
+            &lt;div class=&quot;error&quot; ng-message=&quot;signup_form.name.$error&quot; ng-messages-multiple&gt;
+            &lt;!-- ng-messages-multiple属性控制显示所有错误 --&gt;
+                &lt;small class=&quot;error&quot; ng-message=&quot;required&quot;&gt;
+                    Your name is required.
+                &lt;/small&gt;
+                &lt;small class=&quot;error&quot; ng-message=&quot;minlength&quot;&gt;
+                    Your name is required to be at least 3 characters.
+                &lt;/small&gt;
+                &lt;small class=&quot;error&quot; ng-message=&quot;maxlength&quot;&gt;
+                    Your name can&apos;t be longer than 20 characters.
+                &lt;/small&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;button type=&quot;submit&quot; ng-disabled=&quot;signup_form.$invalid&quot; class=&quot;btn btn-default sub&quot;&gt;Submit&lt;/button&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt; 
+</code></pre><p>很多时候我们在表单验证中的错误信息都是相似的，我们可以将它们保存在模板中，从而避免重复输入。为此，可以引入<code>ng-messages-incldude</code>属性引入模板：</p>
+<pre><code>&lt;div class=&quot;error&quot; ng-message=&quot;signup_form.name.$error&quot; ng-messages-incldude=&quot;templates/errors.html&quot; ng-messages-multiple&gt;&lt;/div&gt;
+
+&lt;!--templates/errors.html--&gt;
+&lt;small class=&quot;error&quot; ng-message=&quot;required&quot;&gt;
+    Your name is required.
+&lt;/small&gt;
+&lt;small class=&quot;error&quot; ng-message=&quot;minlength&quot;&gt;
+    Your name is required to be at least 3 characters.
+&lt;/small&gt;
+&lt;small class=&quot;error&quot; ng-message=&quot;maxlength&quot;&gt;
+    Your name can&apos;t be longer than 20 characters.
+&lt;/small&gt;
+</code></pre><p>当然也可以使用ngMessages指令检查带有自定义的消息的指令。这部分内容将在学习完指令内容之后讨论。</p>
+<p>需要<strong>注意</strong>的是：引入<code>ngMessages</code>指令需要在<code>script</code>标签中引入，使用时作为程序的依赖模块使用<br>即：</p>
+<pre><code>angular.module(&apos;myApp&apos;,[&apos;ngMessages&apos;]);
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/05/用ngMessages指令实现表单验证/" data-id="cj3eh2r3s0004598rf758lmw4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJs/">AngularJs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ngMessages/">ngMessages</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/16/js实现带提示功能的搜索框/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          js实现带提示功能的搜索框
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/04/Markdown常用语法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Markdown常用语法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT日记/">IT日记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/扯/">扯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJs/">AngularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-clip/">background-clip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bower/">bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/const/">const</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/let/">let</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ngMessages/">ngMessages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索框/">搜索框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AngularJs/" style="font-size: 10px;">AngularJs</a> <a href="/tags/CSS3/" style="font-size: 10px;">CSS3</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/background-clip/" style="font-size: 10px;">background-clip</a> <a href="/tags/bower/" style="font-size: 10px;">bower</a> <a href="/tags/const/" style="font-size: 10px;">const</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/let/" style="font-size: 10px;">let</a> <a href="/tags/ngMessages/" style="font-size: 10px;">ngMessages</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/搜索框/" style="font-size: 10px;">搜索框</a> <a href="/tags/正则表达式/" style="font-size: 20px;">正则表达式</a> <a href="/tags/类/" style="font-size: 10px;">类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/31/正则表达式-属性与方法/">正则表达式--属性与方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/30/正则表达式--类/">正则表达式--类</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/es6学习笔记01-let、const/">es6学习笔记01/let、const</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/14/CSS3学习记录01-background-clip/">CSS3学习记录01/background-clip</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/18/less的基本使用/">less的基本使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 LiuLu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

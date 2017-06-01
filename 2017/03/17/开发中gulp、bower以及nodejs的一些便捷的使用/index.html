@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>开发中gulp、bower以及npm的一些便捷的使用 | The Pursuit of Happyness</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用angularjs开发webapp时，很多工具可以提高我们的开发效率，降低我们的开发复杂度。其中自动化构建工具gulp可以增强工作流程，帮助我们快速构建项目并减少频繁的IO操作；包依赖管理工具bower可以帮助我们方便的安装开发中要是用的js类库，并且自动下载该类库所依赖的包；而npm作为node的包管理工具，同样可以帮助我们安装第三方包，除此之外，它还可以生成package.json文件，该">
+<meta name="keywords" content="gulp,bower,npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发中gulp、bower以及npm的一些便捷的使用">
+<meta property="og:url" content="http://yoursite.com/2017/03/17/开发中gulp、bower以及nodejs的一些便捷的使用/index.html">
+<meta property="og:site_name" content="The Pursuit of Happyness">
+<meta property="og:description" content="使用angularjs开发webapp时，很多工具可以提高我们的开发效率，降低我们的开发复杂度。其中自动化构建工具gulp可以增强工作流程，帮助我们快速构建项目并减少频繁的IO操作；包依赖管理工具bower可以帮助我们方便的安装开发中要是用的js类库，并且自动下载该类库所依赖的包；而npm作为node的包管理工具，同样可以帮助我们安装第三方包，除此之外，它还可以生成package.json文件，该">
+<meta property="og:image" content="http://i1.piimg.com/567571/73223336152c2e62.png">
+<meta property="og:image" content="http://i1.piimg.com/567571/9921b2662b975054.png">
+<meta property="og:updated_time" content="2017-03-18T02:38:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开发中gulp、bower以及npm的一些便捷的使用">
+<meta name="twitter:description" content="使用angularjs开发webapp时，很多工具可以提高我们的开发效率，降低我们的开发复杂度。其中自动化构建工具gulp可以增强工作流程，帮助我们快速构建项目并减少频繁的IO操作；包依赖管理工具bower可以帮助我们方便的安装开发中要是用的js类库，并且自动下载该类库所依赖的包；而npm作为node的包管理工具，同样可以帮助我们安装第三方包，除此之外，它还可以生成package.json文件，该">
+<meta name="twitter:image" content="http://i1.piimg.com/567571/73223336152c2e62.png">
+  
+    <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">The Pursuit of Happyness</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">IT学习日记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-开发中gulp、bower以及nodejs的一些便捷的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/17/开发中gulp、bower以及nodejs的一些便捷的使用/" class="article-date">
+  <time datetime="2017-03-17T02:59:10.000Z" itemprop="datePublished">2017-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      开发中gulp、bower以及npm的一些便捷的使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用angularjs开发webapp时，很多工具可以提高我们的开发效率，降低我们的开发复杂度。其中自动化构建工具gulp可以增强工作流程，帮助我们快速构建项目并减少频繁的IO操作；包依赖管理工具bower可以帮助我们方便的安装开发中要是用的js类库，并且自动下载该类库所依赖的包；而npm作为node的包管理工具，同样可以帮助我们安装第三方包，除此之外，它还可以生成package.json文件，该文件配置了项目所需运行的运行和开发环境，定义了项目所需的各种模块。下面我们将记录它们的一些简单的web开发中的一些常用使用。<br><a id="more"></a></p>
+<hr>
+<h2 id="1-A-package-manager-for-the-web-Bower"><a href="#1-A-package-manager-for-the-web-Bower" class="headerlink" title="1. A package manager for the web - Bower"></a>1. A package manager for the web - Bower</h2><p>顾名思义，bower是一款web开发的包管理工具。很多说法也称它为js包依赖管理工具，因为它可以很容易地管理js库之间的依赖，并自动安装这些依赖。举个例子，之前前端开发要引入bootstrap，由于bootstrap是需要依赖jquery的，我们就要先去引入一个jquery的cdn，然后再引入一个bootstrap的cdn。前端框架何其多，如果要引入的框架所需的依赖我们并不清楚或疏忽了，就会直接搞砸我们的开发。而使用了bower引入bootstrap呢，bower会自动安装它所需要依赖的jquery依赖版本，真的是轻松方便又享受啊。</p>
+<p>使用bower安装bootstrap：</p>
+<p><img src="http://i1.piimg.com/567571/73223336152c2e62.png"></p>
+<p>打开bower_components，发现它们都在里面了：</p>
+<p><img src="http://i1.piimg.com/567571/9921b2662b975054.png"></p>
+<p>了解了它的作用，我们再简单了解一下它的使用：</p>
+<p>创建web项目时，我们首先定位到当前开发目录，然后使用命令<code>bower init</code>创建<code>bower.json</code>配置文件:</p>
+<pre><code>{
+  &quot;name&quot;: &quot;web_test&quot;,
+  &quot;authors&quot;: [
+    &quot;HitLiuLu &lt;tlglilulu@163.com&gt;&quot;
+  ],
+  &quot;description&quot;: &quot;angularjs webapp&quot;,
+  &quot;main&quot;: &quot;&quot;,
+  &quot;keywords&quot;: [
+    &quot;angularjs&quot;
+  ],
+  &quot;license&quot;: &quot;MIT&quot;,
+  &quot;homepage&quot;: &quot;&quot;,
+  &quot;ignore&quot;: [
+    &quot;**/.*&quot;,
+    &quot;node_modules&quot;,
+    &quot;bower_components&quot;,
+    &quot;test&quot;,
+    &quot;tests&quot;
+  ],
+  &quot;dependencies&quot;: {
+  }
+}
+</code></pre><p>配置文件中的字段表明了这个web项目一些信息。</p>
+<p>接下来，假设我们开发中要用到bootstrap，需要我们在控制台中敲击命令：<code>bower install bootstrap --save</code>，其中<code>--save</code>表示在<code>bower.json</code>中添加配置信息：</p>
+<pre><code>{
+  &quot;name&quot;: &quot;web_test&quot;,
+  &quot;authors&quot;: [
+    &quot;HitLiuLu &lt;tlglilulu@163.com&gt;&quot;
+  ],
+  &quot;description&quot;: &quot;angularjs webapp&quot;,
+  &quot;main&quot;: &quot;&quot;,
+  &quot;keywords&quot;: [
+    &quot;angularjs&quot;
+  ],
+  &quot;license&quot;: &quot;MIT&quot;,
+  &quot;homepage&quot;: &quot;&quot;,
+  &quot;ignore&quot;: [
+    &quot;**/.*&quot;,
+    &quot;node_modules&quot;,
+    &quot;bower_components&quot;,
+    &quot;test&quot;,
+    &quot;tests&quot;
+  ],
+  &quot;dependencies&quot;: {
+      &quot;bootstrap&quot;: &quot;^3.3.7&quot;
+  }
+}
+</code></pre><p>我们发现bootstrap被添加到了项目中的依赖列表里。</p>
+<p>如果我们不需要Bootstrap了，就可以通过命令<code>bower uninstall bootstrap --save</code>卸载bootstrap依赖。同理，若需要保存依赖配置信息，去掉<code>--save</code>即可。</p>
+<hr>
+<h2 id="2-npm-npm-is-the-package-manager-for-JavaScript"><a href="#2-npm-npm-is-the-package-manager-for-JavaScript" class="headerlink" title="2.npm - npm is the package manager for JavaScript"></a>2.npm - npm is the package manager for JavaScript</h2><p>NPM是随同NodeJS一起安装的包管理工具，它允许用户从NPM服务器下载别人编写的第三方包到本地使用，也允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用。</p>
+<p>本文所介绍的bower和gulp都是通过它安装使用的：<br><code>npm install bower -g</code>和<code>npm install gulp -g</code></p>
+<p>同样的，我们在使用npm管理整个项目，开始，要是用<code>npm init</code>命令初始化，并生成<code>package.json</code>配置文件：</p>
+<pre><code>{
+  &quot;name&quot;: &quot;web_test&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;devDependencies&quot;: {
+  }
+}
+</code></pre><p>这个文件定义了项目所需要的各种模块，以及项目的配置信息（比如名称、版本、许可证等元数据）。<br>然后这是我在项目完成后，package.json文件的信息：</p>
+<pre><code>{
+  &quot;name&quot;: &quot;web_test&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;main&quot;: &quot;index.js&quot;,
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+  },
+  &quot;author&quot;: &quot;&quot;,
+  &quot;license&quot;: &quot;ISC&quot;,
+  &quot;devDependencies&quot;: {
+    &quot;gulp&quot;: &quot;^3.9.1&quot;,
+    &quot;gulp-clean&quot;: &quot;^0.3.2&quot;,
+    &quot;gulp-concat&quot;: &quot;^2.6.1&quot;,
+    &quot;gulp-connect&quot;: &quot;^5.0.0&quot;,
+    &quot;gulp-cssmin&quot;: &quot;^0.1.7&quot;,
+    &quot;gulp-imagemin&quot;: &quot;^3.1.1&quot;,
+    &quot;gulp-less&quot;: &quot;^3.3.0&quot;,
+    &quot;gulp-load-plugins&quot;: &quot;~1.5.0&quot;,
+    &quot;gulp-plumber&quot;: &quot;^1.1.0&quot;,
+    &quot;gulp-uglify&quot;: &quot;^2.0.1&quot;,
+    &quot;open&quot;: &quot;^0.0.5&quot;
+  }
+}
+</code></pre><p>我们发现较之前的文件，<code>devDependencies</code>字段的对象更加丰富了，这个字段指定了项目开发所需要的模块。她指向的对象的成员分别由模块名和版本要求组成，表示依赖的模块和版本范围。当我们拿到<code>package.json</code>文件时，直接使用<code>npm install</code>命令即可安装项目的这些依赖模块。利用<code>npm install gulp --save-dev</code>就可以写入<code>devDependencies</code>字段中了。</p>
+<p><code>script</code>字段指定了运行脚本命令的npm命令行缩写，更为具体的例子：</p>
+<pre><code>&quot;scripts&quot;: {
+  &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;,
+  &quot;webpack&quot;: &quot;node_modules/.bin/webpack&quot;,
+  &quot;start&quot;: &quot;webpack-dev-server --hot --inline&quot;,
+  &quot;build&quot;: &quot;node_modules/.bin/webpack --progress --profile --colors --config webpack.production.config.js&quot;
+}
+</code></pre><p>例如start指定了运行<code>npm run start</code>时所要执行的命令。</p>
+<p><code>“gulp”: “^3.9.1”</code> 我们看到属性值为<code>gulp</code>的值为<code>^3.9.1</code>，这里的^表示安装3.x.x的最新版本，但是不安装<code>2.x.x</code>也就是安装时不改变大版本号，<br><code>“gulp-load-plugins”: “~1.5.0”,</code>波浪号表示1.5.x的最新版本，但是不安装1.6.x，也就是说安装时不改变大版本号和次要版本号。</p>
+<p>暂时用到的字段比较少，剩下的留有日后补充。</p>
+<p>值得<strong>注意</strong>的是，由于在速度和被墙等方面的原因，推荐使用淘宝在国内的npm镜像，即cnpm，使用起来也很简单，通过<code>npm install -g cnpm</code>安装后，以后在使用到<code>npm</code>的地方统统换成<code>cnpm</code>就行了。例如：</p>
+<pre><code>npm install gulp 
+cnpm install gulp 
+</code></pre><p>他俩是等价的。</p>
+<hr>
+<h2 id="3-gulp-Automate-and-enhance-your-workflow"><a href="#3-gulp-Automate-and-enhance-your-workflow" class="headerlink" title="3.gulp - Automate and enhance your workflow"></a>3.gulp - Automate and enhance your workflow</h2><p>顾名思义，gulp作为一款自动化构建工具，可以增强工作流程，提升工作效率。实际上，gulp是基于Nodejs的自动任务运行器， 她能自动化地完成 javascript/coffee/sass/less/html/image/css 等文件的的测试、检查、合并、压缩、格式化、浏览器自动刷新、部署文件生成，并监听文件在改动后重复指定的这些步骤。应用管道（pipe）的思想，前一级的输出，直接变成后一级的输入，使得在操作上非常简单。下面简单记录项目中gulp的一些简单使用。<br>首先是安装，上文介绍npm时已经有所提及，首先是<code>npm install gulp -g</code>，然后在开发目录下使用命令行<code>npm install --save-dev gulp</code>将gulp模块添加到配置文件package.json中。</p>
+<p>安装完毕，新建<strong>gulpfile.js文件</strong>,它是gulp项目的配置文件，下面是已经写好的一个gulpfile.js文件：</p>
+<pre><code>var gulp = require(&apos;gulp&apos;); //导入gulp工具包
+
+var app = {
+    srcPath: &apos;src/&apos;,
+    devPath: &apos;build/&apos;,
+    prdPath: &apos;dist/&apos;
+};
+
+gulp.task(&apos;lib&apos;, function(){  
+    gulp.src(&apos;bower_components/**/*&apos;)
+    .pipe(gulp.dest(app.devPath + &apos;vendor&apos;))
+    .pipe(gulp.dest(app.prdPath + &apos;vendor&apos;))
+});
+
+
+gulp.task(&apos;default&apos;, [&apos;lib&apos;]);
+</code></pre><p><code>gulp.src(path)</code>表示输出（Emits）path中地址的文件。 它将返回一个 Vinyl files 的 stream 它可以被 piped 到别的插件中。<br><code>gulp.dest(path)</code>能被 pipe 进来，并且将会写文件。并且重新输出（emits）所有数据，因此你可以将它pipe到多个文件夹。如果某文件夹不存在，将会自动创建它。</p>
+<p>下面我们看一则在gulp中使用插件的例子：</p>
+<pre><code>var gulp = require(&apos;gulp&apos;), 
+    less = require(&apos;gulp-less&apos;);
+
+gulp.task(&apos;testLess&apos;, function () {
+    gulp.src(&apos;src/less/index.less&apos;) 
+    .pipe(less()) 
+    .pipe(gulp.dest(&apos;src/css&apos;)); 
+});
+
+gulp.task(&apos;default&apos;,[&apos;testLess&apos;, &apos;elseTask&apos;]); 
+</code></pre><p>本段代码表示在gulp中引入了gulp-less插件，新建任务testLess，这个任务首先调用gulp的api - src()方法定位文件，将其转化成流后pipe到插件的gulp-less，然后用它的.less()方法处理，最终将其pipe到dest文件夹中，生成最终文件。</p>
+<p><code>gulp.task(name[, deps], fn)</code>定义一个使用 Orchestrator 实现的任务（task）。其中，<code>name</code>指任务的名字，<code>deps</code>是一个包含任务列表的数组，这些任务会在你当前任务运行之前完成，可以理解为该任务依赖<code>deps</code>中的任务，执行该任务时需要提前实现依赖。任务运行时，即执行<code>gulp</code>命令时，首先执行default任务。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/17/开发中gulp、bower以及nodejs的一些便捷的使用/" data-id="cj3eh2r3o0002598r4gvpy04x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bower/">bower</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gulp/">gulp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/18/less的基本使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          less的基本使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/16/js实现带提示功能的搜索框/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">js实现带提示功能的搜索框</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/IT日记/">IT日记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/扯/">扯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJs/">AngularJs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/background-clip/">background-clip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bower/">bower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/const/">const</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/less/">less</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/let/">let</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ngMessages/">ngMessages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/搜索框/">搜索框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/类/">类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AngularJs/" style="font-size: 10px;">AngularJs</a> <a href="/tags/CSS3/" style="font-size: 10px;">CSS3</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/background-clip/" style="font-size: 10px;">background-clip</a> <a href="/tags/bower/" style="font-size: 10px;">bower</a> <a href="/tags/const/" style="font-size: 10px;">const</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/less/" style="font-size: 10px;">less</a> <a href="/tags/let/" style="font-size: 10px;">let</a> <a href="/tags/ngMessages/" style="font-size: 10px;">ngMessages</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/搜索框/" style="font-size: 10px;">搜索框</a> <a href="/tags/正则表达式/" style="font-size: 20px;">正则表达式</a> <a href="/tags/类/" style="font-size: 10px;">类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/05/31/正则表达式-属性与方法/">正则表达式--属性与方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/30/正则表达式--类/">正则表达式--类</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/24/es6学习笔记01-let、const/">es6学习笔记01/let、const</a>
+          </li>
+        
+          <li>
+            <a href="/2017/05/14/CSS3学习记录01-background-clip/">CSS3学习记录01/background-clip</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/18/less的基本使用/">less的基本使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 LiuLu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
