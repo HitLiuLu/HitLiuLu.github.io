@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: gulp | The Pursuit of Happyness</title>
+  <title>es6学习笔记03/字符串扩展 | The Pursuit of Happyness</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刘璐的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Pursuit of Happyness">
-<meta property="og:url" content="http://yoursite.com/tags/gulp/index.html">
+  <meta name="description" content="es6新增了一些api以简化字符串的处理方法。下面对一些较为常用的api简单记录一下。">
+<meta name="keywords" content="es6,string">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6学习笔记03&#x2F;字符串扩展">
+<meta property="og:url" content="http://yoursite.com/2017/06/02/es6学习笔记03-字符串扩展/index.html">
 <meta property="og:site_name" content="The Pursuit of Happyness">
-<meta property="og:description" content="刘璐的个人博客">
+<meta property="og:description" content="es6新增了一些api以简化字符串的处理方法。下面对一些较为常用的api简单记录一下。">
+<meta property="og:updated_time" content="2017-06-02T02:45:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Pursuit of Happyness">
-<meta name="twitter:description" content="刘璐的个人博客">
+<meta name="twitter:title" content="es6学习笔记03&#x2F;字符串扩展">
+<meta name="twitter:description" content="es6新增了一些api以简化字符串的处理方法。下面对一些较为常用的api简单记录一下。">
   
     <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
   
@@ -66,39 +68,102 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/03/17/开发中gulp、bower以及nodejs的一些便捷的使用/" class="archive-article-date">
-  <time datetime="2017-03-17T02:59:10.000Z" itemprop="datePublished">3月 17</time>
+        <section id="main"><article id="post-es6学习笔记03-字符串扩展" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/02/es6学习笔记03-字符串扩展/" class="article-date">
+  <time datetime="2017-06-02T02:24:55.000Z" itemprop="datePublished">2017-06-02</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/03/17/开发中gulp、bower以及nodejs的一些便捷的使用/">开发中gulp、bower以及npm的一些便捷的使用</a>
+    <h1 class="article-title" itemprop="name">
+      es6学习笔记03/字符串扩展
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>es6新增了一些api以简化字符串的处理方法。下面对一些较为常用的api简单记录一下。<br><a id="more"></a></p>
+<hr>
+<h2 id="判断字符串包含、起始和结束"><a href="#判断字符串包含、起始和结束" class="headerlink" title="判断字符串包含、起始和结束"></a>判断字符串包含、起始和结束</h2><p>对字符串中是否包含子字符串，是否以某个子字符串起始和结束，在es6中我们可以分别使用includes(),startsWith(),endsWith()方法。</p>
+<pre><code>{
+    //字符串包含某字符串，是否以某字符串开始或结束
+    let str = &quot;string&quot;
+    console.log(&apos;includes&apos;,str.includes(&quot;ring&quot;))
+    console.log(&apos;start&apos;,str.startsWith(&quot;str&quot;))
+    console.log(&apos;end&apos;,str.endsWith(&quot;ng&quot;))
+}
+//结果均为true
+</code></pre><hr>
+<h2 id="重复字符串"><a href="#重复字符串" class="headerlink" title="重复字符串"></a>重复字符串</h2><p>多次重复一个字符串可以使用repeat(n)方法。n表示要重复的次数。</p>
+<pre><code>{
+    let str = &quot;abc&quot;;
+    console.log(str.repeat(2));
+}
+//abcabc
+</code></pre><hr>
+<h2 id="模版字符串"><a href="#模版字符串" class="headerlink" title="模版字符串"></a>模版字符串</h2><p>使用模版字符串可以减少一些复杂的字符串拼接。</p>
+<pre><code>{    
+    //模板字符串
+    let name = &quot;list&quot;;
+    let info = &quot;hello world&quot;;
+    let m = `i am ${name}, ${info}`;
+    console.log(m);
+}
+</code></pre><p>其中数据部分用${ }的形式包在大括号里。</p>
+<hr>
+<h2 id="补白效果"><a href="#补白效果" class="headerlink" title="补白效果"></a>补白效果</h2><p>这一部分实用性效果很好，不过es6中尚未实现，应该属于es7的特性。</p>
+<pre><code>{
+    console.log(&apos;1&apos;,padStart(2,&apos;0&apos;)); 
+     console.log(&apos;1&apos;,padEnd(2,&apos;0&apos;));
+}
+//01 10
+</code></pre><p>补白的效果可以应用在标准化日期时在月份和日期前补0。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/02/es6学习笔记03-字符串扩展/" data-id="cj3f90way0009y2urf1gm3was" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/string/">string</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/02/es6学习笔记04-数值扩展/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          es6学习笔记04/数值扩展
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/01/正则表达式－－ES6新增/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">正则表达式－－ES6新增</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
