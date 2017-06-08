@@ -3,17 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: number | The Pursuit of Happyness</title>
+  <title>es6学习笔记05/数组扩展 | The Pursuit of Happyness</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刘璐的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Pursuit of Happyness">
-<meta property="og:url" content="http://yoursite.com/tags/number/index.html">
+  <meta name="description" content="es6扩展了一些Array数据类型api，方便进行数组操作。">
+<meta name="keywords" content="es6,Array">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6学习笔记05&#x2F;数组扩展">
+<meta property="og:url" content="http://yoursite.com/2017/06/02/es6学习笔记05-数组扩展/index.html">
 <meta property="og:site_name" content="The Pursuit of Happyness">
-<meta property="og:description" content="刘璐的个人博客">
+<meta property="og:description" content="es6扩展了一些Array数据类型api，方便进行数组操作。">
+<meta property="og:image" content="http://oqsocmlnr.bkt.clouddn.com/17-6-6/34392466.jpg">
+<meta property="og:image" content="http://oqsocmlnr.bkt.clouddn.com/17-6-6/78887160.jpg">
+<meta property="og:image" content="http://oqsocmlnr.bkt.clouddn.com/17-6-6/3847873.jpg">
+<meta property="og:updated_time" content="2017-06-06T09:04:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Pursuit of Happyness">
-<meta name="twitter:description" content="刘璐的个人博客">
+<meta name="twitter:title" content="es6学习笔记05&#x2F;数组扩展">
+<meta name="twitter:description" content="es6扩展了一些Array数据类型api，方便进行数组操作。">
+<meta name="twitter:image" content="http://oqsocmlnr.bkt.clouddn.com/17-6-6/34392466.jpg">
   
     <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
   
@@ -66,39 +72,131 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/06/02/es6学习笔记04-数值扩展/" class="archive-article-date">
-  <time datetime="2017-06-02T02:46:43.000Z" itemprop="datePublished">6月 2</time>
+        <section id="main"><article id="post-es6学习笔记05-数组扩展" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/02/es6学习笔记05-数组扩展/" class="article-date">
+  <time datetime="2017-06-02T03:45:12.000Z" itemprop="datePublished">2017-06-02</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/02/es6学习笔记04-数值扩展/">es6学习笔记04/数值扩展</a>
+    <h1 class="article-title" itemprop="name">
+      es6学习笔记05/数组扩展
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>es6扩展了一些Array数据类型api，方便进行数组操作。<br><a id="more"></a></p>
+<hr>
+<h2 id="Array-of"><a href="#Array-of" class="headerlink" title="Array.of()"></a>Array.of()</h2><p>Array.of()方法用于将一组值转换成数组。</p>
+<pre><code>{
+    let arr = Array.of(3,4,7,9,11);
+    console.log(&apos;arr=&apos;,arr);  //arr=[3, 4, 7, 9, 11]
+
+    let empty = Array.of();
+    console.log(&apos;empty&apos;,empty);  //empty []
+}
+</code></pre><p>Array.of() 和 Array 构造函数之间的区别在于处理整数参数：Array.of(7) 创建一个具有单个元素 7 的数组，而 Array(7) 创建一个包含 7 个 undefined 元素的数组。</p>
+<hr>
+<h2 id="Array-from"><a href="#Array-from" class="headerlink" title="Array.from()"></a>Array.from()</h2><p>Array.from() 方法从一个类似数组或可迭代的对象中创建一个新的数组实例。</p>
+<pre><code>{
+    let p = document.querySelectorAll(&apos;p&apos;);
+    let pArr = Array.from(p);
+    pArr.forEach(item=&gt; {
+        console.log(item.textContent);
+    });
+
+    console.log(Array.from([1,3,5],item=&gt;item*2))
+}
+</code></pre><p><img src="http://oqsocmlnr.bkt.clouddn.com/17-6-6/34392466.jpg"></p>
+<p>可以看到Array.from()方法将页面中p标签组成的nodeList转换成数组。同时，该方法可以传递两个参数，第二个参数可以接受一个方法，将第一个的数组或类集合数组进行映射，返回结果。</p>
+<hr>
+<h2 id="数组实例的fill"><a href="#数组实例的fill" class="headerlink" title="数组实例的fill()"></a>数组实例的fill()</h2><p>fill方法使用给定值，填充一个数组。</p>
+<pre><code>{
+  console.log(&apos;fill-7&apos;,[1,&apos;a&apos;,undefined].fill(7));
+  console.log(&apos;fill,pos&apos;,[&apos;a&apos;,&apos;b&apos;,&apos;c&apos;].fill(7,1,3));
+}
+</code></pre><p><img src="http://oqsocmlnr.bkt.clouddn.com/17-6-6/78887160.jpg"><br>fill方法可以用于空数组的初始化，如果数组不为空，数组中的值将被全部抹去。fill方法还可以接受第二个和第三个参数，用于指定填充的起始和截止位置。</p>
+<hr>
+<h2 id="数组实例的entries-keys-和values"><a href="#数组实例的entries-keys-和values" class="headerlink" title="数组实例的entries(),keys()和values()"></a>数组实例的entries(),keys()和values()</h2><p>ES6提供了三个新方法－－entries(),keys()和values()－－用于遍历数组。可以用for…of循环进行遍历，区别是keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历。</p>
+<pre><code>{
+  for(let index of [&apos;1&apos;,&apos;c&apos;,&apos;ks&apos;].keys()){
+    console.log(&apos;keys&apos;,index);
+  }
+
+  // for(let value of [&apos;1&apos;,&apos;c&apos;,&apos;ks&apos;].values()){
+  //   console.log(&apos;values&apos;,value);
+  // } //chrome 尚未实现
+
+  for(let [index,value] of [&apos;1&apos;,&apos;c&apos;,&apos;ks&apos;].entries()){
+    console.log(&apos;values&apos;,index,value);
+  }
+}
+</code></pre><p><img src="http://oqsocmlnr.bkt.clouddn.com/17-6-6/3847873.jpg"></p>
+<hr>
+<h2 id="copyWith"><a href="#copyWith" class="headerlink" title="copyWith()"></a>copyWith()</h2><p>copyWith()方法在当前数组内部，将指定位置的成员复制到其他位置（会覆盖原成员），然后返回但前数组。</p>
+<pre><code>{
+  console.log([1,2,3,4,5].copyWithin(0,3,4));
+  // [4,2,3,4,5]
+}
+</code></pre><hr>
+<h2 id="find-和findIndex"><a href="#find-和findIndex" class="headerlink" title="find()和findIndex()"></a>find()和findIndex()</h2><p>find方法用于寻找符合条件的第一个数组成员，找到第一个并返回该成员，若没有找到符合条件的成员返回undefined。<br>findIndex方法用于返回符合条件的第一个数组成员的位置，如果所有成员都不符合条件则返回－1。</p>
+<pre><code>{
+  console.log([1,2,3,4,5,6].find(item=&gt; item&gt;3)); // 4
+  console.log([1,2,3,4,5,6].findIndex(item=&gt; item&gt;3));  // 3
+}
+</code></pre><hr>
+<h2 id="includes"><a href="#includes" class="headerlink" title="includes()"></a>includes()</h2><p>该方法返回一个布尔值，表示某个数组是否包含给定的值。</p>
+<pre><code>{
+  console.log(&apos;number&apos;,[1,2,NaN].includes(1));  // true
+  console.log(&apos;number&apos;,[1,2,NaN].includes(NaN)); // true es5做不到
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/02/es6学习笔记05-数组扩展/" data-id="cj3nrmixh0009ixur8vr47hb3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Array/">Array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/06/es6学习笔记06函数扩展/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          es6学习笔记06/函数扩展
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/02/es6学习笔记04-数值扩展/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">es6学习笔记04/数值扩展</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         

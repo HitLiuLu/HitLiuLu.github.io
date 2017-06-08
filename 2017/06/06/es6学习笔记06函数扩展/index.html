@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: number | The Pursuit of Happyness</title>
+  <title>es6学习笔记06/函数扩展 | The Pursuit of Happyness</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刘璐的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Pursuit of Happyness">
-<meta property="og:url" content="http://yoursite.com/tags/number/index.html">
+  <meta name="description" content="es6扩展了一些Function数据类型api，方便进行数组操作。">
+<meta name="keywords" content="es6,function">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6学习笔记06&#x2F;函数扩展">
+<meta property="og:url" content="http://yoursite.com/2017/06/06/es6学习笔记06函数扩展/index.html">
 <meta property="og:site_name" content="The Pursuit of Happyness">
-<meta property="og:description" content="刘璐的个人博客">
+<meta property="og:description" content="es6扩展了一些Function数据类型api，方便进行数组操作。">
+<meta property="og:updated_time" content="2017-06-08T01:48:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Pursuit of Happyness">
-<meta name="twitter:description" content="刘璐的个人博客">
+<meta name="twitter:title" content="es6学习笔记06&#x2F;函数扩展">
+<meta name="twitter:description" content="es6扩展了一些Function数据类型api，方便进行数组操作。">
   
     <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
   
@@ -66,39 +68,95 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/06/02/es6学习笔记04-数值扩展/" class="archive-article-date">
-  <time datetime="2017-06-02T02:46:43.000Z" itemprop="datePublished">6月 2</time>
+        <section id="main"><article id="post-es6学习笔记06函数扩展" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/06/es6学习笔记06函数扩展/" class="article-date">
+  <time datetime="2017-06-06T07:50:44.000Z" itemprop="datePublished">2017-06-06</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/02/es6学习笔记04-数值扩展/">es6学习笔记04/数值扩展</a>
+    <h1 class="article-title" itemprop="name">
+      es6学习笔记06/函数扩展
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>es6扩展了一些Function数据类型api，方便进行数组操作。<br><a id="more"></a></p>
+<hr>
+<h2 id="函数参数的默认值"><a href="#函数参数的默认值" class="headerlink" title="函数参数的默认值"></a>函数参数的默认值</h2><p>es6之前只能通过或给参数赋值默认值，比较麻烦。es6允许为函数的参数直接设置默认值，写在参数定义后面就可以。</p>
+<pre><code>{
+  function test(x, y = &apos;world&apos;){
+    console.log(&apos;默认值&apos;,x,y);
+  }
+  test(&apos;hello&apos;);  //hello world
+  test(&apos;hello&apos;,&apos;kill&apos;);  //hello kill
+}
+</code></pre><ul>
+<li><p>作用域：一旦设置了参数的默认值，函数进行声明初始化时，参数会形成一个单独的作用域（context）。等到初始化结束，这个作用域就会消失。这种语法行为，在不设置参数默认值时，是不会出现的。</p>
+<pre><code>{
+  let x=&apos;test&apos;;
+  function test2(x,y=x){
+    console.log(&apos;作用域&apos;,x,y);
+  }
+  test2(&apos;kill&apos;);  //kill kill
+}
+
+{
+  let x=&apos;test&apos;;
+  function test2(x,y=x){
+    console.log(&apos;作用域&apos;,x,y);
+  }
+  test2();  //kill kill
+}
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/06/es6学习笔记06函数扩展/" data-id="cj3nrmixl000bixurivyco6cz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/function/">function</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/08/es6学习笔记07-对象扩展/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          es6学习笔记07/对象扩展
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/02/es6学习笔记05-数组扩展/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">es6学习笔记05/数组扩展</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         

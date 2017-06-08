@@ -3,17 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: number | The Pursuit of Happyness</title>
+  <title>es6学习笔记07/对象扩展 | The Pursuit of Happyness</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刘璐的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Pursuit of Happyness">
-<meta property="og:url" content="http://yoursite.com/tags/number/index.html">
+  <meta name="description" content="es6扩展了一些Object数据类型api，方便进行数组操作。">
+<meta name="keywords" content="es6,object">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6学习笔记07&#x2F;对象扩展">
+<meta property="og:url" content="http://yoursite.com/2017/06/08/es6学习笔记07-对象扩展/index.html">
 <meta property="og:site_name" content="The Pursuit of Happyness">
-<meta property="og:description" content="刘璐的个人博客">
+<meta property="og:description" content="es6扩展了一些Object数据类型api，方便进行数组操作。">
+<meta property="og:updated_time" content="2017-06-08T03:59:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Pursuit of Happyness">
-<meta name="twitter:description" content="刘璐的个人博客">
+<meta name="twitter:title" content="es6学习笔记07&#x2F;对象扩展">
+<meta name="twitter:description" content="es6扩展了一些Object数据类型api，方便进行数组操作。">
   
     <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
   
@@ -66,39 +68,140 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/06/02/es6学习笔记04-数值扩展/" class="archive-article-date">
-  <time datetime="2017-06-02T02:46:43.000Z" itemprop="datePublished">6月 2</time>
+        <section id="main"><article id="post-es6学习笔记07-对象扩展" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/08/es6学习笔记07-对象扩展/" class="article-date">
+  <time datetime="2017-06-08T01:49:15.000Z" itemprop="datePublished">2017-06-08</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/02/es6学习笔记04-数值扩展/">es6学习笔记04/数值扩展</a>
+    <h1 class="article-title" itemprop="name">
+      es6学习笔记07/对象扩展
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>es6扩展了一些Object数据类型api，方便进行数组操作。<br><a id="more"></a></p>
+<hr>
+<h2 id="简洁表示法"><a href="#简洁表示法" class="headerlink" title="简洁表示法"></a>简洁表示法</h2><p>ES6 允许直接写入变量和函数，作为对象的属性和方法。这样的书写更加简洁。</p>
+<pre><code>{
+  // 简洁表示法
+  let o=1;
+  let k=2;
+  let es5={
+    o:o,
+    k:k
+  };
+  let es6={
+    o,
+    k
+  };
+  console.log(es5,es6);
+
+  let es5_method={
+    hello:function(){
+      console.log(&apos;hello&apos;);
+    }
+  };
+  let es6_method={
+    hello(){
+      console.log(&apos;hello&apos;);
+    }
+  };
+  console.log(es5_method.hello(),es6_method.hello());
+}
+</code></pre><p>ES6允许在对象中直接写变量，属性名为变量名，属性值为变量值，且属性名为字符串类型。</p>
+<hr>
+<h2 id="属性表达式"><a href="#属性表达式" class="headerlink" title="属性表达式"></a>属性表达式</h2><p>JavaScript语言定义对象的属性，有两种方法。</p>
+<ul>
+<li>方法一是直接用标识符作为属性名</li>
+<li>方法二是用表达式作为属性名，这时要将表达式放在方括号之内。 </li>
+</ul>
+<pre><code>// 属性表达式
+let a=&apos;b&apos;;
+let es5_obj={  // {a: &quot;c&quot;, b: &quot;c&quot;}
+a:&apos;c&apos;,
+b:&apos;c&apos;
+};
+
+let es6_obj={  // {b: &quot;c&quot;}
+[a]:&apos;c&apos;
+}
+
+console.log(es5_obj,es6_obj);
+</code></pre><p><strong>值得注意的是</strong>，属性名表达式如果是一个对象，默认情况下会自动将对象转换为字符串<code>object Object</code></p>
+<pre><code>const keyA = {a: 1};
+const keyB = {b: 2};
+
+const myObject = {
+  [keyA]: &apos;valueA&apos;,
+  [keyB]: &apos;valueB&apos;
+};
+
+myObject // Object {[object Object]: &quot;valueB&quot;}
+</code></pre><p>所以会覆盖<code>[keyA]</code>属性。</p>
+<hr>
+<h2 id="新增api"><a href="#新增api" class="headerlink" title="新增api"></a>新增api</h2><ul>
+<li><p>Object.is()</p>
+<pre><code>console.log(&apos;字符串&apos;,Object.is(&apos;abc&apos;,&apos;abc&apos;),&apos;abc&apos;===&apos;abc&apos;);
+</code></pre></li>
+</ul>
+<p><code>Object.is()</code>用于判断两个值是否严格相等，与es5的<code>===</code>功能相似。不同的是该方法修正了严格相等的两处不适合的地方，它们分别是<code>+0</code>不等于<code>-0</code>，<code>NaN</code>等于<code>NaN</code>。</p>
+<pre><code>+0 === -0 //true
+NaN === NaN // false
+
+Object.is(+0, -0) // false
+Object.is(NaN, NaN) // true
+</code></pre><ul>
+<li>Object.assign()</li>
+</ul>
+<p>Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。</p>
+<pre><code>console.log(&apos;拷贝&apos;,Object.assign({a:&apos;a&apos;},{b:&apos;b&apos;}));  //{a: &quot;a&quot;, b: &quot;b&quot;}
+</code></pre><ul>
+<li><p>Object.keys()，Object.values()，Object.entries()<br>ES5 引入了Object.keys方法，返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键名。<br>Object.values方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值。<br>Object.entries方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（enumerable）属性的键值对数组。<br>Object.entries()方法的另一个用处是，将对象转为真正的Map结构。</p>
+<pre><code>var obj = { foo: &apos;bar&apos;, baz: 42 };
+var map = new Map(Object.entries(obj));
+map // Map { foo: &quot;bar&quot;, baz: 42 }
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/08/es6学习笔记07-对象扩展/" data-id="cj3nrmixq000fixur67vjiol0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/object/">object</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/06/06/es6学习笔记06函数扩展/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">es6学习笔记06/函数扩展</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
