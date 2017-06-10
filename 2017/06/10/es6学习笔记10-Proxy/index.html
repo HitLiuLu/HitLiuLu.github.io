@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: Array | The Pursuit of Happyness</title>
+  <title>es6学习笔记10/Proxy | The Pursuit of Happyness</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刘璐的个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="The Pursuit of Happyness">
-<meta property="og:url" content="http://yoursite.com/tags/Array/index.html">
+  <meta name="description" content="Proxy，顾名思义就是代理，可以理解成在目标对象之前架设一层拦截，外界对该对象的访问，都必须通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。">
+<meta name="keywords" content="es6,Proxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es6学习笔记10&#x2F;Proxy">
+<meta property="og:url" content="http://yoursite.com/2017/06/10/es6学习笔记10-Proxy/index.html">
 <meta property="og:site_name" content="The Pursuit of Happyness">
-<meta property="og:description" content="刘璐的个人博客">
+<meta property="og:description" content="Proxy，顾名思义就是代理，可以理解成在目标对象之前架设一层拦截，外界对该对象的访问，都必须通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。">
+<meta property="og:image" content="http://oqsocmlnr.bkt.clouddn.com/17-6-10/99343829.jpg">
+<meta property="og:updated_time" content="2017-06-10T13:10:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="The Pursuit of Happyness">
-<meta name="twitter:description" content="刘璐的个人博客">
+<meta name="twitter:title" content="es6学习笔记10&#x2F;Proxy">
+<meta name="twitter:description" content="Proxy，顾名思义就是代理，可以理解成在目标对象之前架设一层拦截，外界对该对象的访问，都必须通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。">
+<meta name="twitter:image" content="http://oqsocmlnr.bkt.clouddn.com/17-6-10/99343829.jpg">
   
     <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
   
@@ -66,39 +70,124 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/06/02/es6学习笔记05-数组扩展/" class="archive-article-date">
-  <time datetime="2017-06-02T03:45:12.000Z" itemprop="datePublished">6月 2</time>
+        <section id="main"><article id="post-es6学习笔记10-Proxy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/10/es6学习笔记10-Proxy/" class="article-date">
+  <time datetime="2017-06-10T12:31:10.000Z" itemprop="datePublished">2017-06-10</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/06/02/es6学习笔记05-数组扩展/">es6学习笔记05/数组扩展</a>
+    <h1 class="article-title" itemprop="name">
+      es6学习笔记10/Proxy
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Proxy，顾名思义就是代理，可以理解成在目标对象之前架设一层拦截，外界对该对象的访问，都必须通过这层拦截，因此提供了一种机制，可以对外界的访问进行过滤和改写。<br><a id="more"></a></p>
+<pre><code>let obj= {
+    time:&apos;2017-03-11&apos;,
+    name:&apos;net&apos;,
+    _r:123
+}; 
+//原始对象来存取真实的数据(类似供应商)
+
+let monitor = new Proxy(obj,{
+    // 拦截代理跟读取相关的属性
+    get(target,key) {
+        return target[key].replace(&apos;2017&apos;,&apos;2018&apos;);
+    },
+    //拦截对象属性的设置
+    set(target,key,value) {
+        if (key===&apos;name&apos;) {
+            return target[key]=value;
+        } else {
+            return target[key];
+        }
+    },
+    //判断当前对象是否拥有某个属性 拦截key in object
+    has(target,key) {
+        if (key===&apos;name&apos;) {
+            return target[key];
+        } else {
+            return false;
+        }
+    },
+    //拦截delete 
+    deleteProperty(target,key) {
+        if (key.indexOf(&apos;_&apos;)&gt;-1) {
+            delete target[key];
+            return true;
+        }else {
+            return target[key];
+        }
+    },
+    // 拦截Object.keys,Object.getOwnPropertySymbols,Object.getOwnPropertyNames
+    ownKeys(target) {
+        return Object.keys(target).filter(item=&gt;item!=&apos;time&apos;);
+    }
+}); 
+// 通过obj新生成一个对象，这个对象是映射obj的
+
+//用户访问的是monitor
+// monitor
+console.log(&apos;get&apos;,monitor.time);
+
+monitor.time=&apos;2018&apos;;
+monitor.name=&apos;hahaha&apos;;
+console.log(&apos;set&apos;,monitor); //time没有变化而name发生了变化
+
+console.log(&apos;has&apos;,&apos;name&apos; in monitor);
+console.log(&apos;has&apos;,&apos;time&apos; in monitor);
+
+delete monitor.time;
+console.log(&apos;delete&apos;,monitor);
+
+delete monitor._r;
+console.log(&apos;delete&apos;,monitor);
+
+console.log(&apos;ownKeys&apos;,Object.keys(monitor));
+</code></pre><p>输出为</p>
+<p><img src="http://oqsocmlnr.bkt.clouddn.com/17-6-10/99343829.jpg"></p>
+<p>关于Proxy支持的拦截操作的详细信息，以及关于Proxy的更多内容，请参考<br><a href="http://es6.ruanyifeng.com/#docs/proxy" target="_blank" rel="external">《ECMAScript 6 入门 阮一峰》</a></p>
+<p>Proxy可用于对象与逻辑解耦，有利于代码的整洁性和复用性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/06/10/es6学习笔记10-Proxy/" data-id="cj3r9gd8e000l0q8rwv84b692" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Proxy/">Proxy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/06/10/es6学习笔记09-Set与Map数据结构/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">es6学习笔记09/Set与Map数据结构</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
