@@ -3,19 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>正则表达式--属性与方法 | The Pursuit of Happyness</title>
+  <title>Tag: Symbol | The Pursuit of Happyness</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="昨天学习了正则表达式的类那一部分，今天学习了剩下的部分。">
-<meta name="keywords" content="正则表达式">
-<meta property="og:type" content="article">
-<meta property="og:title" content="正则表达式--属性与方法">
-<meta property="og:url" content="http://yoursite.com/2017/05/31/正则表达式-属性与方法/index.html">
+  <meta name="description" content="刘璐的个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Pursuit of Happyness">
+<meta property="og:url" content="http://yoursite.com/tags/Symbol/index.html">
 <meta property="og:site_name" content="The Pursuit of Happyness">
-<meta property="og:description" content="昨天学习了正则表达式的类那一部分，今天学习了剩下的部分。">
-<meta property="og:updated_time" content="2017-05-31T14:38:36.000Z">
+<meta property="og:description" content="刘璐的个人博客">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="正则表达式--属性与方法">
-<meta name="twitter:description" content="昨天学习了正则表达式的类那一部分，今天学习了剩下的部分。">
+<meta name="twitter:title" content="The Pursuit of Happyness">
+<meta name="twitter:description" content="刘璐的个人博客">
   
     <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
   
@@ -68,122 +66,39 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-正则表达式-属性与方法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/31/正则表达式-属性与方法/" class="article-date">
-  <time datetime="2017-05-31T13:17:06.000Z" itemprop="datePublished">2017-05-31</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/IT日记/">IT日记</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      正则表达式--属性与方法
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/06/10/es6学习笔记08-Symbol/" class="archive-article-date">
+  <time datetime="2017-06-10T03:17:18.000Z" itemprop="datePublished">6月 10</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/06/10/es6学习笔记08-Symbol/">es6学习笔记08/Symbol</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>昨天学习了正则表达式的类那一部分，今天学习了剩下的部分。<br><a id="more"></a></p>
-<hr>
-<h2 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h2><p>假如我们想匹配一个连续出现20次数字的字符串，根据上次所学，我们可以写一个正则表达式来匹配，即\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d，我们发现这样写非常麻烦，我们可以使用\d{20}来匹配。</p>
-<ul>
-<li>?：出现零次或一次（最多出现一次）</li>
-<li>+：出现一次或多次（至少出现一次）</li>
-<li>*：出现零次或多次（任意次）</li>
-<li>{n}：出现n次</li>
-<li>{n,m}：出现n到m次</li>
-<li>{n,}：至少出现n次</li>
-<li>{0,n}：至多出现n次</li>
-</ul>
-<hr>
-<h2 id="贪婪模式与非贪婪模式"><a href="#贪婪模式与非贪婪模式" class="headerlink" title="贪婪模式与非贪婪模式"></a>贪婪模式与非贪婪模式</h2><p>贪婪模式：</p>
-<pre><code>&apos;12345678&apos;.replace(/\d{3,6}/g, &apos;X&apos;)
-&quot;X78&quot;
-</code></pre><p>JS默认进行贪婪匹配，所以会匹配6个数字，然后进行替换。</p>
-<p>非贪婪模式：让正则表达式尽可能少的匹配，也就是说一旦成功匹配不再继续尝试就是非贪婪模式。非贪婪模式的做法是在量词后加上<code>?</code>即可。</p>
-<pre><code>&apos;12345678&apos;.match(/\d{3,5}?/g)
-[&quot;123&quot;,&quot;456&quot;,&quot;789&quot;]
-</code></pre><hr>
-<h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><p>匹配字符串连续出现3次的场景，我们使用<code>Byron{3}</code>，我们发现匹配了3个字母n，这样我们就不能匹配连续出现的词组。使用()可以达到分组的功能，使量词作用于分组，即(Byron){3}</p>
-<hr>
-<h2 id="或"><a href="#或" class="headerlink" title="或"></a>或</h2><p>正则中使用<code>|</code>可以达到或的效果，<code>Byron|Casper</code>可以匹配Byron或Casper，<code>Byr(on|Ca)sper</code>可以匹配on或Ca。</p>
-<hr>
-<h2 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h2><p>我们想将2015-12-25变换成12/25/2015，需要使用反向引用。</p>
-<pre><code>&apos;2015-12-25&apos;.replace(/(\d{4})-(\d{2})-(\d{2})/g, &apos;$2/$3/$1&apos;)
-</code></pre><p>这样就可以变换格式成功。</p>
-<p><strong>原理：</strong>将字符串分成3组，分别是group1,group2和group3，<code>$1</code>反向引用第一组，同理$2和$3也是如此。</p>
-<hr>
-<h2 id="忽略分组"><a href="#忽略分组" class="headerlink" title="忽略分组"></a>忽略分组</h2><p>不希望捕获分组时，只需要在分组内加上?:就可以。</p>
-<pre><code>(?:Byron).(ok)
-//匹配到一个字符串加一个任意字符再加上一个分组(ok)
-</code></pre><hr>
-<h2 id="JS对象属性"><a href="#JS对象属性" class="headerlink" title="JS对象属性"></a>JS对象属性</h2><ul>
-<li>lastIndex：是当前表达式匹配内容的最后一个字符的下一个位置</li>
-<li>source：正则表达式的文本字符串<br>再加上之前说过的三个修饰符，分别对应的三个属性：global、ignore和multiline</li>
-</ul>
-<hr>
-<h2 id="test和exec方法"><a href="#test和exec方法" class="headerlink" title="test和exec方法"></a>test和exec方法</h2><ul>
-<li><p>test用于测试字符串参数中是否存在匹配正则表达式模式的字符串，如果存在返回true，不存在返回false。</p>
-<pre><code>var reg1 = /\w/;
-reg1.test(&apos;a&apos;);
-//true
-</code></pre></li>
-<li><p>exec使用正则表达式模式对字符串执行搜索，并将更新全局RegExpduixiang对象的属性以反映匹配结果，如果没有匹配的文本则返回null,否则返回一个结果数组：</p>
-<ul>
-<li>index声明匹配文本的第一个字符的位置</li>
-<li>input存放被检索的字符串string</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h2 id="字符串对象方法"><a href="#字符串对象方法" class="headerlink" title="字符串对象方法"></a>字符串对象方法</h2><ul>
-<li>search()方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/31/正则表达式-属性与方法/" data-id="cj3r0kf6o000uit8rengdxtso" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2017/06/01/正则表达式－－ES6新增/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          正则表达式－－ES6新增
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/05/30/正则表达式--类/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">正则表达式--类</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
 </section>
         
