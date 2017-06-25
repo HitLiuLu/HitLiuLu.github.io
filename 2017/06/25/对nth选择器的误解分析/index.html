@@ -3,19 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>es6学习笔记11/Reflect | The Pursuit of Happyness</title>
+  <title>对nth选择器的误解分析 | The Pursuit of Happyness</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Reflect与Proxy对象一样，也是es6为了操作对象而提供的新api。">
-<meta name="keywords" content="es6,Reflect">
+  <meta name="description" content="因为要做一个以页面样式为主要工作的官网，昨天开始系统地学习CSS3的一些知识。首先接触的就是css选择器，发现之前对css选择器的理解一直不够准确，存在误解，现纪录下来。">
+<meta name="keywords" content="CSS3,nth选择器,选择器">
 <meta property="og:type" content="article">
-<meta property="og:title" content="es6学习笔记11&#x2F;Reflect">
-<meta property="og:url" content="http://yoursite.com/2017/06/10/es6学习笔记11-Reflect/index.html">
+<meta property="og:title" content="对nth选择器的误解分析">
+<meta property="og:url" content="http://yoursite.com/2017/06/25/对nth选择器的误解分析/index.html">
 <meta property="og:site_name" content="The Pursuit of Happyness">
-<meta property="og:description" content="Reflect与Proxy对象一样，也是es6为了操作对象而提供的新api。">
-<meta property="og:updated_time" content="2017-06-12T02:38:36.000Z">
+<meta property="og:description" content="因为要做一个以页面样式为主要工作的官网，昨天开始系统地学习CSS3的一些知识。首先接触的就是css选择器，发现之前对css选择器的理解一直不够准确，存在误解，现纪录下来。">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/25/594f2f30f3c11.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/25/594f31eac214b.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/06/25/594f339de5821.png">
+<meta property="og:updated_time" content="2017-06-25T03:56:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="es6学习笔记11&#x2F;Reflect">
-<meta name="twitter:description" content="Reflect与Proxy对象一样，也是es6为了操作对象而提供的新api。">
+<meta name="twitter:title" content="对nth选择器的误解分析">
+<meta name="twitter:description" content="因为要做一个以页面样式为主要工作的官网，昨天开始系统地学习CSS3的一些知识。首先接触的就是css选择器，发现之前对css选择器的理解一直不够准确，存在误解，现纪录下来。">
+<meta name="twitter:image" content="https://ooo.0o0.ooo/2017/06/25/594f2f30f3c11.png">
   
     <link rel="alternate" href="/atom.xml" title="The Pursuit of Happyness" type="application/atom+xml">
   
@@ -68,10 +72,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-es6学习笔记11-Reflect" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-对nth选择器的误解分析" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/10/es6学习笔记11-Reflect/" class="article-date">
-  <time datetime="2017-06-10T13:12:54.000Z" itemprop="datePublished">2017-06-10</time>
+    <a href="/2017/06/25/对nth选择器的误解分析/" class="article-date">
+  <time datetime="2017-06-25T02:38:14.000Z" itemprop="datePublished">2017-06-25</time>
 </a>
     
   <div class="article-category">
@@ -86,7 +90,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      es6学习笔记11/Reflect
+      对nth选择器的误解分析
     </h1>
   
 
@@ -94,40 +98,125 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Reflect与Proxy对象一样，也是es6为了操作对象而提供的新api。<br><a id="more"></a></p>
+        <p>因为要做一个以页面样式为主要工作的官网，昨天开始系统地学习CSS3的一些知识。首先接触的就是css选择器，发现之前对css选择器的理解一直不够准确，存在误解，现纪录下来。<br><a id="more"></a></p>
 <hr>
-<h2 id="Reflect的设计目的"><a href="#Reflect的设计目的" class="headerlink" title="Reflect的设计目的"></a>Reflect的设计目的</h2><ul>
-<li>将Object对象的一些明显属于语言内部的方法（例如Object.defineProperpty），放到Reflect对象上。现阶段某些方法同时在Object和Reflect对象上部署，未来的新方法将只会部署在Reflect对象上，从Reflect对象上可以拿到语言内部的方法。</li>
-<li>修改某些Object方法的返回结果，让其变得更加合理。比如Object.defineProperty(obj,name,desc)在无法定义属性时，会抛出错误，而Reflect.defineProperty(obj,name,desc)则会返回false。</li>
-<li>让Object操作都变成函数行为。某些Object操作是命令式，比如name in obj和delete obj[name]，而Reflect.has(obj,name)和Reflect.deleteProperty(obj,name)让它们变成了函数行为。</li>
-<li>Reflect对象的方法与Proxy对象的方法一一对应，只要是Proxy对象的方法，就能在Reflect对象上找到对应方法。这就让Proxy对象可以方便的调用对应的Reflect方法，完成默认行为，作为修改行为的基础。不管Proxy怎么修改默认行为，你总可以在Reflect上获取默认行为。</li>
+<h2 id="nth选择器"><a href="#nth选择器" class="headerlink" title="nth选择器"></a>nth选择器</h2><p>我们都知道nth选择器可以用于定位元素位置，从而给其设置相应的样式。通过对它的学习总结，我认为nth选择器可以大概分为两个阵营。其一我把它称为child阵营，其二我把它叫做of-type阵营。下面分别说明我为什么这么分。</p>
+<hr>
+<h2 id="child阵营"><a href="#child阵营" class="headerlink" title="child阵营"></a>child阵营</h2><p>这个阵营哪些成员，又有何共同、特有特征呢。下面先总结：</p>
+<ul>
+<li>:first-child: 匹配其父元素的第一个元素</li>
+<li>:last-child: 匹配其父元素的最后一个元素</li>
+<li>:nth-child(N): 匹配其父元素的第N个元素<br>  其中N可以是具体数字也可以是关于n的表达式，例如:nth-child(1)就和:first-child实现的功能相同，都是选择其父元素的第一个元素。<br>  :nth-child(2n+1)表示取奇数位元素，:nth-child(2n)表示取偶数位元素，分别相当于:nth-child(odd)和:nth-child(even)。</li>
+<li>:nth-last-child(N): 表示从最后一个元素开始计数，值得注意的是，css选择器中的数都是从1开始计的，这与js中的以0开始的计数规则不同。</li>
 </ul>
+<p>在介绍特征之前先说一下我以前对它的误解吧，看一个例子：</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;child&lt;/title&gt;
+    &lt;style&gt;
+        section:first-child {
+            color: #f00;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;section&gt;
+        &lt;div&gt;1-1&lt;/div&gt;
+        &lt;div&gt;1-2&lt;/div&gt;
+        &lt;div&gt;1-3&lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+        &lt;div&gt;2-1&lt;/div&gt;
+        &lt;div&gt;2-2&lt;/div&gt;
+        &lt;div&gt;2-3&lt;/div&gt;
+    &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>按照我之前的理解，section:first-child选择的是section下面的第一个子元素，所以就是1-1和2-1变红，我们看一下实际结果：</p>
+<p><img src="https://ooo.0o0.ooo/2017/06/25/594f2f30f3c11.png"></p>
+<p>很明显，结果与我们想象的不同。因为以前的这种想法其实是误解了nth选择器。</p>
+<p>接下来，我们归纳一下它们的共同特征。对于child阵营里的所有选择器来说，它们有两个特点值得我们注意。</p>
+<ul>
+<li><ol>
+<li>其父元素：顾名思义，是:之前的元素的父元素下的子元素。</li>
+</ol>
+</li>
+<li><ol>
+<li>第N个: 以first-child为例，就是第一个子元素，当且仅当它是第一个时才会被选择。<br>了解了这两个特点以后，在看上面的例子，首先第一点，是section的其父元素，及body元素，第二点就是body下面的第一个子元素若是section则选中，故变红的是1-1，1-2和1-3。</li>
+</ol>
+</li>
+</ul>
+<p>我们对上面的例子稍作改动，在section元素之前添加一个div：</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;child&lt;/title&gt;
+    &lt;style&gt;
+        section:first-child {
+            color: #f00;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;section&gt;
+        &lt;div&gt;1-1&lt;/div&gt;
+        &lt;div&gt;1-2&lt;/div&gt;
+        &lt;div&gt;1-3&lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+        &lt;div&gt;2-1&lt;/div&gt;
+        &lt;div&gt;2-2&lt;/div&gt;
+        &lt;div&gt;2-3&lt;/div&gt;
+    &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;    
+</code></pre><p>结果如下： </p>
+<p><img src="https://ooo.0o0.ooo/2017/06/25/594f31eac214b.png"></p>
+<p>我们看到没有元素变红，这是因为不满足第二点的当且仅当条件，此时body子元素的第一个子元素是div，不是section，故不能选中。</p>
+<p>我们拿:first-child作为实例，其它child阵营选择器与此同理。</p>
 <hr>
-<h2 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h2><pre><code>let obj={
-  time:&apos;2017-03-11&apos;,
-  name:&apos;net&apos;,
-  _r:123
-};
-
-console.log(&apos;Reflect get&apos;,Reflect.get(obj,&apos;time&apos;));
-// Reflect get 2017-03-11
-
-Reflect.set(obj,&apos;name&apos;,&apos;LiuLu&apos;);
-
-console.log(obj);
-// Object {time: &quot;2017-03-11&quot;, name: &quot;LiuLu&quot;, _r: 123}
-
-console.log(&apos;has&apos;,Reflect.has(obj,&apos;name&apos;));
-//has true
-</code></pre><p>Reflect共提供了15种静态方法。具体请参考<a href="http://es6.ruanyifeng.com/#docs/proxy" target="_blank" rel="external">《ECMAScript 6 入门 阮一峰》</a>。</p>
+<h2 id="of-type阵营"><a href="#of-type阵营" class="headerlink" title="of-type阵营"></a>of-type阵营</h2><p>这个阵营哪些成员，又有何共同、特有特征呢。下面先总结：</p>
+<ul>
+<li>:first-of-type: 匹配其父元素的特定类型的第一个元素</li>
+<li>:last-of-type: 匹配其父元素的特定类型的最后一个元素</li>
+<li>:nth-of-type(N): 匹配其父元素的特定类型的第N个元素<br>  其中N可以是具体数字也可以是关于n的表达式，例如:nth-of-type(1)就和:first-of-type实现的功能相同，都是选择其父元素的第一个元素。<br>  :nth-of-type(2n+1)表示取奇数位元素，:nth-of-type(2n)表示取偶数位元素，分别相当于:nth-of-type(odd)和:nth-of-type(even)。</li>
+<li>:nth-last-of-type(N): 表示从最后一个元素开始计数，值得注意的是，css选择器中的数都是从1开始计的，这与js中的以0开始的计数规则不同。</li>
+</ul>
+<p>下面主要看一下of-type与child的差别，其它不赘述。</p>
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;child&lt;/title&gt;
+    &lt;style&gt;
+        section:first-of-type {
+            color: #f00;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;&lt;/div&gt;
+    &lt;section&gt;
+        &lt;div&gt;1-1&lt;/div&gt;
+        &lt;div&gt;1-2&lt;/div&gt;
+        &lt;div&gt;1-3&lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section&gt;
+        &lt;div&gt;2-1&lt;/div&gt;
+        &lt;div&gt;2-2&lt;/div&gt;
+        &lt;div&gt;2-3&lt;/div&gt;
+    &lt;/section&gt;
+&lt;/body&gt;
+&lt;/html&gt;    
+</code></pre><p>结果是：</p>
+<p><img src="https://ooo.0o0.ooo/2017/06/25/594f339de5821.png"></p>
+<p>还是和上面一样的结构，不同的是选择器将child换成of-type，我们发现section下的文字变红，因为of-type选择器选择的是特定类型，所以选择的是body下面section元素的第一个，忽略了其他元素。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/10/es6学习笔记11-Reflect/" data-id="cj4c3ui0r000nccur2jbp069y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/06/25/对nth选择器的误解分析/" data-id="cj4c3ui160012ccur835mkzt7" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Reflect/">Reflect</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS3/">CSS3</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nth选择器/">nth选择器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/选择器/">选择器</a></li></ul>
 
     </footer>
   </div>
@@ -135,19 +224,19 @@ console.log(&apos;has&apos;,Reflect.has(obj,&apos;name&apos;));
     
 <nav id="article-nav">
   
-    <a href="/2017/06/12/es6学习笔记12-class/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/06/25/1/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          es6学习笔记12/class
+          (no title)
         
       </div>
     </a>
   
   
-    <a href="/2017/06/10/es6学习笔记10-Proxy/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/06/23/关于一道js继承问题的笔记/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">es6学习笔记10/Proxy</div>
+      <div class="article-nav-title">关于一道js继承问题的笔记</div>
     </a>
   
 </nav>
